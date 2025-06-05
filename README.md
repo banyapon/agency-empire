@@ -69,7 +69,7 @@ If you find this extension useful and would like to support its development, con
 
 1. **Clone or download this repository**  
    ```bash
-   git clone https://github.com/yourusername/agency-empire.git
+   git clone https://github.com/banyapon/agency-empire.git
    cd agency-empire
    ```
 
