@@ -200,7 +200,7 @@ If you find this extension useful and would like to support its development, con
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE). Feel free to use, modify, and distribute.
+This project is licensed under the [MIT License](https://github.com/banyapon/agency-empire/blob/main/LICENSE). Feel free to use, modify, and distribute.
 
 ---
 
