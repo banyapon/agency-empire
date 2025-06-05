@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="app-title">เกมจำลองบริหารเอเจนซี่</title>
+
+  <!-- ลิงก์ไปยังไฟล์ CSS ที่เราแยกไว้ -->
+  <link href="{{media}}/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="game-container">
+    <!-- HEADER BAR -->
+    <header class="header-bar">
+      <h1 id="app-name-header">
+        <span style="font-size:1.4rem; font-weight:600;">&#128719; Agency Simulation</span>
+      </h1>
+      <div class="header-right-controls">
+        <select id="language-selector" style="
+          background-color: var(--vscode-input-background);
+          color: var(--vscode-input-foreground);
+          border: 1px solid var(--vscode-editor-lineHighlightBorder);
+          padding: 4px 8px;
+          border-radius: 4px;
+        ">
+          <option value="en">English</option>
+          <option value="th">ไทย (Thai)</option>
+          <option value="ja">日本語 (Japanese)</option>
+          <option value="zh">中文 (Chinese)</option>
+        </select>
+
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+          <div id="money-stat-container">
+            💰 <span data-lang="moneyLabel">เงินทุน</span>: <span id="money">100000</span>
+          </div>
+          <div id="reputation-stat-container">
+            ⭐ <span data-lang="reputationLabel">ชื่อเสียง</span>: <span id="reputation">10</span>
+          </div>
+          <div id="office-level-stat-container">
+            ⬆️ <span data-lang="officeLevelLabel">ออฟฟิศ Lv</span>: <span id="officeLevel">1</span>
+          </div>
+          <div id="current-date-stat-container">
+            📅 <span id="currentDateFormatted">ปี 1, เดือน 1, วัน 1</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <!-- PROJECTS SECTION -->
+      <section class="section projects-section">
+        <div class="section-header">
+          <h2 data-lang="projectsSectionTitle">📂 โปรเจกต์</h2>
+          <button class="button" onclick="generateNewProjectOpportunity()" data-lang="findNewProjectBtn">
+            ➕ หาโปรเจกต์ใหม่
+          </button>
+        </div>
+        <!-- TABS -->
+        <div class="tabs">
+          <button class="tab-button active" onclick="openTab(event, 'available-projects')"
+            data-lang="tabAvailableProjects">โปรเจกต์ว่าง</button>
+          <button class="tab-button" onclick="openTab(event, 'in-progress-projects')"
+            data-lang="tabInProgressProjects">กำลังดำเนินการ</button>
+          <button class="tab-button" onclick="openTab(event, 'completed-projects')"
+            data-lang="tabCompletedProjects">โปรเจกต์ที่เสร็จสิ้น</button>
+        </div>
+
+        <!-- AVAILABLE PROJECTS -->
+        <div id="available-projects" class="tab-content active">
+          <p id="no-available-projects" class="no-items" data-lang="noAvailableProjects">
+            ยังไม่มีโปรเจกต์ว่างในขณะนี้ ลองกด "หาโปรเจกต์ใหม่"
+          </p>
+          <div id="available-projects-list"></div>
+        </div>
+
+        <!-- IN-PROGRESS PROJECTS -->
+        <div id="in-progress-projects" class="tab-content">
+          <p id="no-in-progress-projects" class="no-items" data-lang="noInProgressProjects">
+            ยังไม่มีโปรเจกต์ที่กำลังดำเนินการ
+          </p>
+          <div id="in-progress-projects-list"></div>
+        </div>
+
+        <!-- COMPLETED PROJECTS -->
+        <div id="completed-projects" class="tab-content">
+          <p id="no-completed-projects" class="no-items" data-lang="noCompletedProjects">
+            ยังไม่มีโปรเจกต์ที่เสร็จสิ้น
+          </p>
+          <div id="completed-projects-list"></div>
+        </div>
+      </section>
+
+      <!-- TEAM SECTION -->
+      <aside class="section team-section">
+        <div class="section-header">
+          <h2 data-lang="teamSectionTitle">👥 ทีมงาน</h2>
+          <button class="button" onclick="openHireModal()" data-lang="hireEmployeeBtn">➕ จ้างพนักงาน</button>
+        </div>
+        <div id="employee-list" class="item-list">
+          <p id="no-employees" class="no-items" data-lang="noEmployees">
+            ยังไม่มีพนักงาน
+          </p>
+        </div>
+
+        <div class="section-header mt-4">
+          <h2 data-lang="officeUpgradeSectionTitle">🛠 อัปเกรดออฟฟิศ</h2>
+        </div>
+        <div class="project-card">
+          <h3 data-lang="upgradeOfficeToLevel">อัปเกรดออฟฟิศเป็น Lv. <span id="nextOfficeLevel">2</span></h3>
+          <p data-lang="upgradeOfficeDesc">เพิ่มขีดจำกัดพนักงานและโอกาสได้โปรเจกต์ดีขึ้น</p>
+          <p><span data-lang="priceLabel">ราคา</span>: <span id="officeUpgradeCost">500000</span> <span
+              data-lang="currencySuffix">บาท</span></p>
+          <button class="button" id="upgradeOfficeButton" onclick="upgradeOffice()" data-lang="upgradeBtn">
+            อัปเกรด
+          </button>
+        </div>
+      </aside>
+
+      <!-- NOTIFICATIONS / EVENTS -->
+      <aside class="section events-section">
+        <h2 data-lang="notificationsSectionTitle">🔔 การแจ้งเตือน / อีเวนต์</h2>
+        <div id="event-log-container" class="event-log-container">
+          <p id="no-events" class="no-items" data-lang="noNotifications">
+            ยังไม่มีการแจ้งเตือน
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- TUTORIAL MODAL -->
+    <div id="tutorial-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('tutorial-modal')">&times;</span>
+        <h2 data-lang="tutorialTitle">Welcome to Agency Simulation!</h2>
+        <p><strong data-lang="tutorialGoalLabel">Goal:</strong> <span data-lang="tutorialGoalText">Build the ultimate
+            advertising agency!</span></p>
+        <p><strong data-lang="tutorialHowToPlay">How to Play:</strong></p>
+        <ul>
+          <li data-lang="tutorialStepFindProject">Click the "Find New Project" button to search for client jobs</li>
+          <li data-lang="tutorialStepAcceptProject">Review available projects and click "Accept This Job"</li>
+          <li data-lang="tutorialStepHireEmployees">Once you have enough funds, hire staff from the "Team" section</li>
+          <li data-lang="tutorialStepManageProjects">Accepted projects will appear in the "In Progress" section</li>
+          <li data-lang="tutorialStepFinances">Completed projects will be invoiced — wait to receive payment</li>
+          <li data-lang="tutorialStepUpgrade">Upgrade your office to take on more work and hire more employees</li>
+        </ul>
+        <p><strong data-lang="tutorialTipLabel">Tips:</strong> <span data-lang="tutorialTipText">Manage your budget
+            wisely, choose projects that suit your team, and watch out for random events!</span></p>
+        <button class="button" onclick="closeModal('tutorial-modal')" data-lang="tutorialStartButton">Got it! Let's
+          Play!</button>
+      </div>
+    </div>
+
+
+    <!-- HIRE EMPLOYEE MODAL -->
+    <div id="hire-employee-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('hire-employee-modal')">&times;</span>
+        <h2 data-lang="hireModalTitle">เปิดรับสมัครพนักงาน</h2>
+        <div id="candidate-list" class="item-list"></div>
+        <p id="no-candidates" class="no-items" data-lang="noCandidates">
+          ยังไม่มีผู้สมัครในขณะนี้ ลองค้นหาใหม่วันถัดไป
+        </p>
+      </div>
+    </div>
+
+    <!-- PROJECT DETAIL MODAL -->
+    <div id="project-detail-modal" class="modal">
+      <div class="modal-content" id="project-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ลิงก์ไปยังไฟล์ JS ที่เราแยกไว้ -->
+  <script src="{{media}}/main.js"></script>
+</body>
+
+</html>

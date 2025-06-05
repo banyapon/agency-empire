@@ -1,0 +1,300 @@
+/* 1) รีเซ็ต margin/padding ให้เรียบง่าย */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* 2) ใช้ background/foreground ตามธีมของ VS Code */
+body {
+  font-family: var(--vscode-editor-font-family, sans-serif);
+  font-size: var(--vscode-editor-font-size, 14px);
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* 3) Game container ให้มีเงาและขอบมน */
+.game-container {
+  width: 95%;
+  margin-top: 20px;
+  background-color: var(--vscode-panel-background);
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+/* 4) Header bar */
+.header-bar {
+  background-color: var(--vscode-titleBar-activeBackground);
+  color: var(--vscode-titleBar-activeForeground);
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-bar h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* 5) ปุ่ม (button) */
+.button {
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button:hover {
+  background-color: var(--vscode-button-hoverBackground);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* 6) Secondary button (outline style) */
+.button-secondary {
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  border: 1px solid var(--vscode-editor-foreground);
+}
+
+.button-secondary:hover {
+  background-color: var(--vscode-button-hoverBackground);
+  color: var(--vscode-editor-foreground);
+}
+
+/* 7) Danger button */
+.button-danger {
+  background-color: var(--vscode-destructive-button-background, #be1100);
+  color: var(--vscode-destructive-button-foreground, #ffffff);
+}
+
+.button-danger:hover {
+  background-color: var(--vscode-destructive-button-hoverBackground, #e81123);
+}
+
+/* 8) Progress bar */
+.progress-bar-container {
+  width: 100%;
+  background-color: var(--vscode-progressBar-background);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progress-bar {
+  background-color: var(--vscode-progressBar-foreground);
+  height: 100%;
+  width: 0%;
+  transition: width 0.2s ease-in-out;
+}
+
+/* 9) Tabs */
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--vscode-editor-lineHighlightBorder);
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--vscode-editor-foreground);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tabs button.active {
+  color: var(--vscode-editor-activeSelectionForeground);
+  border-bottom-color: var(--vscode-editor-activeSelectionBackground);
+  font-weight: 500;
+}
+
+.tabs button:hover:not(.active) {
+  color: var(--vscode-editor-inactiveSelectionForeground);
+}
+
+.tab-content {
+  max-height: calc(100vh - 200px);
+  /* ปรับ “200px” ตาม header + footer + padding ของ container จริง */
+  overflow-y: auto;
+
+}
+
+/* 10) Section กล่องต่าง ๆ */
+.section {
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-editor-lineHighlightBorder);
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--vscode-editor-foreground);
+  border-bottom: 1px solid var(--vscode-editor-lineHighlightBorder);
+  padding-bottom: 4px;
+}
+
+/* 11) Project / Employee Cards */
+.project-card,
+.employee-card {
+  background-color: var(--vscode-editorWidget-background);
+  border: 1px solid var(--vscode-editorWidget-border);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease;
+}
+
+.project-card:hover,
+.employee-card:hover {
+  transform: translateY(-2px);
+}
+
+.project-card h3,
+.employee-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--vscode-editor-foreground);
+}
+
+.project-card p,
+.employee-card p {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--vscode-editor-foreground);
+}
+
+/* 12) Modal Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 999;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: var(--vscode-editorWidget-background);
+  border: 1px solid var(--vscode-editorWidget-border);
+  border-radius: 6px;
+  padding: 16px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--vscode-editor-foreground);
+}
+
+.modal-close:hover {
+  color: var(--vscode-editor-inactiveSelectionForeground);
+}
+
+/* เสริมเล็กน้อยให้ layout ดูเป็นระเบียบ */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.projects-section,
+.team-section,
+.events-section {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-list {
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.no-items {
+  color: var(--vscode-editor-foreground);
+}
+
+.stats-bar {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+#available-projects-list,
+#in-progress-projects-list,
+#completed-projects-list {
+  max-height: 60vh;
+  /* ยกตัวอย่างให้ list ไม่ยาวเกิน 60% ของ viewport */
+  overflow-y: auto;
+}
+
+#employee-list {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* 4. ทำให้ Notifications / Events สามารถ scroll ได้ */
+#event-log-container {
+  max-height: 60vh;
+  overflow-y: auto;
+}
