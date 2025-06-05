@@ -158,11 +158,11 @@ Below are a few screenshots showing the in-game UI inside VS Code.
 _(Note: Replace the paths with your actual image locations in the repository.)_
 
 1. **Main Dashboard**  
-   ![Main Dashboard](images/screenshot1.png)  
+   ![Main Dashboard](https://github.com/banyapon/agency-empire/raw/main/images/screenshot1.png)  
    *Shows available projects, team roster, and notifications pane.*
 
 2. **Project Details & Progress**  
-   ![Project Details](images/screenshot2.png)  
+   ![Project Details](https://github.com/banyapon/agency-empire/raw/main/images/screenshot2.png)  
    *Inspect project budget, timeline, billing terms, and accept or process billing.*
 
 ---
