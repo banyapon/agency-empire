@@ -1,6 +1,7 @@
 {
   "name": "agency-empire",
   "displayName": "Agency Simulation",
+  "publisher": "banyapon",
   "description": "Production House Simulation Game in VS Code",
   "version": "0.0.1",
   "engines": {
