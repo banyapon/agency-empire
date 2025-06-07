@@ -3,11 +3,13 @@
   "displayName": "Agency Simulation",
   "publisher": "banyapon",
   "description": "Production House Simulation Game in VS Code",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.50.0"
   },
   "categories": [
+    "Visualization",
+    "Education",
     "Other"
   ],
   "activationEvents": [
